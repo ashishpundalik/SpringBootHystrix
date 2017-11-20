@@ -2,13 +2,11 @@ package starter.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import starter.models.Avenger;
 import starter.models.Avengers;
 import starter.services.AvengersService;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -21,9 +19,15 @@ public class AvengersController {
     @Autowired
     private AvengersService avengersService;
 
-    @RequestMapping("/avengers")
-    public ResponseEntity<Avengers> avengers() throws ExecutionException, InterruptedException {
-        Avengers avengers = avengersService.getAvengers();
+    @RequestMapping(value = "/avengers", method = RequestMethod.GET)
+    public ResponseEntity<Avenger> avengers(@RequestParam("id") int id) throws ExecutionException, InterruptedException {
+        Avenger avenger = avengersService.getAvengerById(id);
+        return ResponseEntity.ok(avenger);
+    }
+
+    @RequestMapping(value = "/avengers/all", method = RequestMethod.GET)
+    public ResponseEntity<Avengers> allAvengers() throws ExecutionException, InterruptedException {
+        Avengers avengers = avengersService.getAllAvengers();
         return ResponseEntity.ok(avengers);
     }
 }
