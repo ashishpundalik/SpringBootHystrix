@@ -24,6 +24,6 @@ targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile group: 'com.netflix.hystrix', name: 'hystrix-javanica', version: '1.5.12'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: '1.4.4.RELEASE'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
